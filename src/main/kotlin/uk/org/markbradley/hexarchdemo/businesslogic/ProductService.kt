@@ -6,10 +6,7 @@ import uk.org.markbradley.hexarchdemo.rest.product.ProductFinder
 import uk.org.markbradley.hexarchdemo.rest.product.ProductLister
 
 @Service
-class ProductService(): ProductLister, ProductFinder, ProductCreator {
-    override fun Create(product: Product): Product {
-        return product
-    }
+class ProductService(): ProductLister, ProductFinder {
 
     override fun findBy(ean: String): Product {
         return Product(ean, "Biscuits", "biscuits.gif", 99)

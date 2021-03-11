@@ -5,4 +5,8 @@ data class Product(
         val name: String,
         val imageUrl: String,
         val priceInPence: Int
-)
+) {
+    fun isValid(): Boolean {
+        return name == "beans"
+    }
+}
