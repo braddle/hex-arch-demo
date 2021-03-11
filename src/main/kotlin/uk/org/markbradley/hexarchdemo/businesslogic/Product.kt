@@ -7,6 +7,6 @@ data class Product(
         val priceInPence: Int
 ) {
     fun isValid(): Boolean {
-        return name == "beans"
+        return !name.equals("beans")
     }
 }

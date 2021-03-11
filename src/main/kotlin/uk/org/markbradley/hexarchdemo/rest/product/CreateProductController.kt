@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import uk.org.markbradley.hexarchdemo.businesslogic.Product
+import uk.org.markbradley.hexarchdemo.businesslogic.ProductInvalidException
 
 @RestController
 class CreateProductController {
@@ -15,9 +16,16 @@ class CreateProductController {
     @PostMapping("/product")
     fun createProduct(@RequestBody product: JsonProduct): String {
         val p = Product(product.ean, product.name, product.imageUrl, product.price)
-        val out = creator.Create(p)
-        val outJson = JsonProduct(out.ean, out.name, out.imageUrl, out.priceInPence)
 
-        return "TODO create a product and return it: $outJson"
+        try {
+            val out = creator.Create(p)
+            val outJson = JsonProduct(out.ean, out.name, out.imageUrl, out.priceInPence)
+
+            return "200: $outJson"
+        } catch (e: ProductInvalidException) {
+            return "400: ${e.message}"
+        } catch (e: Exception) {
+            return "500: ${e.message}"
+        }
     }
 }

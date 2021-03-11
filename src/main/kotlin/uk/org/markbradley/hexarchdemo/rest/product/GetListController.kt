@@ -13,6 +13,6 @@ class GetListController {
     @GetMapping("/product")
     fun getProducts(): String {
         val p = lister.ListProducts()
-        return "TODO return a list of products $p"
+        return "201 $p"
     }
 }
